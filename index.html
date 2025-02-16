@@ -16,6 +16,7 @@
             font-family: traveling_typewriter; src: url('TravelingTypewriter.ttf'); 
         }
         
+        
         .overlay {
             position: fixed;
             top: 0;
@@ -39,11 +40,6 @@
             max-width: 600px;
             text-align: center;
             margin: 1rem;
-        }
-
-        .overlay h1 {
-            color: #333;
-            margin-bottom: 1rem;
         }
 
         .overlay p {
@@ -75,12 +71,6 @@
             opacity: 1;
         }
 
-        body {
-            padding: 2rem;
-            background: #fff;
-            color: #333;
-        }
-
         .header {
             margin-bottom: 3rem;
         }
@@ -107,29 +97,6 @@
             color: #888;
         }
 
-        .plus {
-            color: #9fd0c7;
-            margin-left: 0.25rem;
-        }
-
-        .filter-section {
-            margin: 2rem 0;
-        }
-
-        .filter-section h2 {
-            font-size: 0.8rem;
-            color: #999;
-            text-transform: uppercase;
-            margin-bottom: 1rem;
-        }
-
-        .filter-section a {
-            color: #333;
-            text-decoration: none;
-            display: block;
-            margin: 0.5rem 0;
-        }
-
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -140,26 +107,35 @@
         .grid-item {
             background: #f5f5f5;
             aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #999;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .grid-item:hover {
-            background: #eee;
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        footer {
-            margin-top: 4rem;
-            color: #999;
-            font-size: 0.9rem;
+        .grid-item-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
         }
 
-        /* Modal Styles */
+        .grid-item:hover .grid-item-title {
+            transform: translateY(0);
+        }
+
         .modal {
             display: none;
             position: fixed;
@@ -167,7 +143,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
@@ -182,7 +158,7 @@
             background: white;
             padding: 2rem;
             margin: auto;
-            max-width: 600px;
+            max-width: 800px;
             width: 90%;
             position: relative;
             transform: translateY(-20px);
@@ -191,6 +167,13 @@
 
         .modal.active .modal-content {
             transform: translateY(0);
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
         }
 
         .close-button {
@@ -224,7 +207,6 @@
             border-top: 1px solid #eee;
         }
 
-        /* Navigation Arrows */
         .modal-nav {
             position: absolute;
             top: 50%;
@@ -251,6 +233,12 @@
             right: -5rem;
         }
 
+        footer {
+            margin-top: 4rem;
+            color: #999;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 768px) {
             .modal-nav {
                 color: #666;
@@ -270,98 +258,100 @@
     </style>
 </head>
 <body>
-<body>
-    <!-- Full-screen overlay/banner -->
     <div class="overlay" id="welcome-overlay" onclick="enterSite()">
         <div class="overlay-content">
             <p>dreamy_anwhere respectfully acknowledges the Traditional Custodians of the land on which this event takes place, the Wurundjeri Woi Wurrung peoples of the Kulin Nation, and pay respect to their Elders past, present and emerging. Sovereignty was never ceded.</p>
-            <div class="timer" id="timer">15 seconds...</div>
+            <p>Click to enter the gallery</p>
+            <div class="timer" id="timer">15</div>
         </div>
     </div>
 
-    <!-- Main content -->
-   <div class="header">
-        <h1>A small team of designers creating minimalist work with attention to detail.</h1>
-        
+    <div class="header">
+        <h1>'On love'</h1>
         <nav>
-            <a href="#">Work<span class="plus">+</span></a>
             <a href="#">About</a>
-            <a href="#">Blog<span class="plus">+</span></a>
             <a href="#">Contact</a>
         </nav>
-
-        <div class="filter-section">
-            <h2>Works Filter</h2>
-            <a href="#">All</a>
-            <a href="#">Typography</a>
-            <a href="#">Illustration</a>
-            <a href="#">Branding</a>
-        </div>
     </div>
 
     <div class="grid">
-        <div class="grid-item" data-project-id="0">Typography Study</div>
-        <div class="grid-item" data-project-id="1">Brand Design</div>
-        <div class="grid-item" data-project-id="2">Editorial</div>
-        <div class="grid-item" data-project-id="3">Illustration</div>
-        <div class="grid-item" data-project-id="4">Packaging</div>
-        <div class="grid-item" data-project-id="5">Digital</div>
+        <div class="grid-item" data-project-id="0">
+            <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Typography Study">
+            <div class="grid-item-title">Typography Study</div>
+        </div>
+        <div class="grid-item" data-project-id="1">
+            <img src="/api/placeholder/600/600" alt="Brand Design">
+            <div class="grid-item-title">Brand Design</div>
+        </div>
+        <div class="grid-item" data-project-id="2">
+            <img src="/api/placeholder/600/600" alt="Editorial">
+            <div class="grid-item-title">Editorial</div>
+        </div>
+        <div class="grid-item" data-project-id="3">
+            <img src="/api/placeholder/600/600" alt="Illustration">
+            <div class="grid-item-title">Illustration</div>
+        </div>
+        <div class="grid-item" data-project-id="4">
+            <img src="/api/placeholder/600/600" alt="Packaging">
+            <div class="grid-item-title">Packaging</div>
+        </div>
+        <div class="grid-item" data-project-id="5">
+            <img src="/api/placeholder/600/600" alt="Digital">
+            <div class="grid-item-title">Digital</div>
+        </div>
     </div>
 
-    <!-- Modal -->
     <div class="modal" id="projectModal">
-        <button class="modal-nav modal-prev" onclick="navigateProject(-1)">←</button>
         <div class="modal-content">
             <button class="close-button" onclick="closeModal()">×</button>
+            <img class="modal-image" src="" alt="">
             <h2 class="modal-title"></h2>
             <p class="modal-description"></p>
             <div class="modal-details"></div>
+            <button class="modal-nav modal-prev" onclick="navigateProject(-1)">←</button>
+            <button class="modal-nav modal-next" onclick="navigateProject(1)">→</button>
         </div>
-        <button class="modal-nav modal-next" onclick="navigateProject(1)">→</button>
     </div>
 
     <footer>
-        <p>© 2025. Crafted with care & love.</p>
+        <p>© dreamy_anwhere 2025. stay dreamy.</p>
     </footer>
 
     <script>
-        // Project data
-        const projects = [
-            {
-                title: 'Typography Project',
-                description: 'A minimalist typographic exploration focusing on spacing and rhythm. Created for a boutique fashion brand.',
-                details: 'Typography / 2025'
-            },
-            {
-                title: 'Brand Identity',
-                description: 'Complete brand identity system including logo, typography, and visual language for a modern tech startup.',
-                details: 'Branding / 2025'
-            },
-            {
-                title: 'Editorial Design',
-                description: 'Magazine layout and editorial design exploring the intersection of art and technology.',
-                details: 'Typography / 2025'
-            },
-            {
-                title: 'Illustration Series',
-                description: 'A series of digital illustrations exploring abstract geometric forms and organic shapes.',
-                details: 'Illustration / 2025'
-            },
-            {
-                title: 'Package Design',
-                description: 'Minimalist packaging design for an artisanal coffee roaster, focusing on sustainability.',
-                details: 'Branding / 2025'
-            },
-            {
-                title: 'Digital Experience',
-                description: 'Interactive digital experience designed for a contemporary art exhibition.',
-                details: 'Typography / 2025'
-            }
-        ];
+        const projects = [{
+            title: 'Typography Project',
+            description: 'A minimalist typographic exploration focusing on spacing and rhythm. Created for a boutique fashion brand.',
+            details: 'Typography / 2025',
+            image: 'https://www.w3schools.com/images/w3schools_green.jpg'
+        }, {
+            title: 'Brand Identity',
+            description: 'Complete brand identity system including logo, typography, and visual language for a modern tech startup.',
+            details: 'Branding / 2025',
+            image: '/api/placeholder/800/600'
+        }, {
+            title: 'Editorial Design',
+            description: 'Magazine layout and editorial design exploring the intersection of art and technology.',
+            details: 'Typography / 2025',
+            image: '/api/placeholder/800/600'
+        }, {
+            title: 'Illustration Series',
+            description: 'A series of digital illustrations exploring abstract geometric forms and organic shapes.',
+            details: 'Illustration / 2025',
+            image: '/api/placeholder/800/600'
+        }, {
+            title: 'Package Design',
+            description: 'Minimalist packaging design for an artisanal coffee roaster, focusing on sustainability.',
+            details: 'Branding / 2025',
+            image: '/api/placeholder/800/600'
+        }, {
+            title: 'Digital Experience',
+            description: 'Interactive digital experience designed for a contemporary art exhibition.',
+            details: 'Typography / 2025',
+            image: '/api/placeholder/800/600'
+        }];
 
         let currentProjectId = 0;
 
-        // Add click handlers to grid items
         document.querySelectorAll('.grid-item').forEach(item => {
             item.addEventListener('click', () => {
                 const projectId = parseInt(item.dataset.projectId);
@@ -373,6 +363,7 @@
             currentProjectId = projectId;
             const project = projects[projectId];
             const modal = document.getElementById('projectModal');
+            modal.querySelector('.modal-image').src = project.image;
             modal.querySelector('.modal-title').textContent = project.title;
             modal.querySelector('.modal-description').textContent = project.description;
             modal.querySelector('.modal-details').textContent = project.details;
@@ -390,25 +381,22 @@
             let nextId = currentProjectId + direction;
             if (nextId < 0) nextId = projects.length - 1;
             if (nextId >= projects.length) nextId = 0;
-            
-            // Add a small fade effect
+
             const content = document.querySelector('.modal-content');
             content.style.opacity = '0';
-            
+
             setTimeout(() => {
                 openModal(nextId);
                 content.style.opacity = '1';
             }, 200);
         }
 
-        // Close modal when clicking outside
         document.getElementById('projectModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
@@ -418,17 +406,14 @@
                 navigateProject(1);
             }
         });
-    </script>
 
-    <script>
         let timeLeft = 15;
         const timerElement = document.getElementById('timer');
-        
-        // Update timer every second
+
         const timerInterval = setInterval(() => {
             timeLeft--;
             timerElement.textContent = `${timeLeft}`;
-            
+
             if (timeLeft <= 0) {
                 enterSite();
             }
@@ -439,7 +424,30 @@
             document.getElementById('welcome-overlay').classList.add('hidden');
             document.getElementById('main-content').classList.add('visible');
         }
-    </script>
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.querySelector('.modal-content').addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.querySelector('.modal-content').addEventListener('touchend', e => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+        });
+
+function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchEndX - touchStartX;
     
+    if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0) {
+            navigateProject(-1); // Swipe right = previous
+        } else {
+            navigateProject(1);  // Swipe left = next
+        }
+    }
+}
+    </script>
 </body>
 </html>
