@@ -16,7 +16,7 @@
             font-family: traveling_typewriter; src: url('TravelingTypewriter.ttf'); 
         }
 
-        .overlay {
+              .overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -45,11 +45,12 @@
             color: #666;
             margin-bottom: 1.5rem;
             line-height: 1.6;
+            font-size: 2rem;
         }
 
         .timer {
             color: #999;
-            font-size: 0.9rem;
+            font-size: 1.5rem;
             margin-top: 1rem;
         }
 
@@ -71,11 +72,13 @@
         }
 
         .header {
+            margin-top: 2rem;
             margin-bottom: 3rem;
+            text-align: center;
         }
 
         .header h1 {
-            font-size: 1.5rem;
+            font-size: 3rem;
             font-weight: normal;
             margin-bottom: 1rem;
             color: #666;
@@ -146,6 +149,8 @@
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s ease;
+            overflow-y: auto;
+            padding: 1rem;
         }
 
         .modal.active {
@@ -156,10 +161,12 @@
         .modal-content {
             background: white;
             padding: 2rem;
-            margin: auto;
+            margin: 2rem auto;
             max-width: 800px;
             width: 90%;
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
             transform: translateY(-20px);
             transition: transform 0.3s ease;
         }
@@ -170,9 +177,10 @@
 
         .modal-image {
             width: 100%;
-            max-height: 500px;
             object-fit: cover;
             margin-bottom: 1.5rem;
+            height: auto;
+            max-height: 70vh;
         }
 
         .close-button {
@@ -192,18 +200,24 @@
 
         .modal-title {
             font-size: 1.5rem;
+        }
+        
+        .modal-details {
+            margin-top: 1rem;
             margin-bottom: 1rem;
         }
 
         .modal-description {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border-top: 1px solid #eee;
             color: #666;
-            line-height: 1.6;
         }
-
-        .modal-details {
-            margin-top: 1rem;
+        
+        .modal-artistbio {
             padding-top: 1rem;
             border-top: 1px solid #eee;
+            color: #666;
         }
 
         .modal-nav {
@@ -233,9 +247,10 @@
         }
 
         footer {
-            margin-top: 4rem;
+            margin-top: 3rem;
             color: #999;
             font-size: 0.9rem;
+            margin-bottom: 2rem;
         }
 
         @media (max-width: 768px) {
@@ -266,7 +281,7 @@
     </div>
 
     <div class="header">
-        <h1>'On love'</h1>
+        <h1>'on love'</h1>
         <nav>
             <a href="#">About</a>
             <a href="#">Contact</a>
@@ -279,7 +294,7 @@
             <div class="grid-item-title">Typography Study</div>
         </div>
         <div class="grid-item" data-project-id="1">
-            <img src="image1.png" alt="Brand Design">
+            <img src="/api/placeholder/600/600" alt="Brand Design">
             <div class="grid-item-title">Brand Design</div>
         </div>
         <div class="grid-item" data-project-id="2">
@@ -305,8 +320,9 @@
             <button class="close-button" onclick="closeModal()">×</button>
             <img class="modal-image" src="" alt="">
             <h2 class="modal-title"></h2>
-            <p class="modal-description"></p>
-            <div class="modal-details"></div>
+            <p class="modal-details"></p>
+            <div class="modal-description"></div>
+            <p class="modal-artistbio"></p>
             <button class="modal-nav modal-prev" onclick="navigateProject(-1)">←</button>
             <button class="modal-nav modal-next" onclick="navigateProject(1)">→</button>
         </div>
@@ -318,34 +334,40 @@
 
     <script>
         const projects = [{
-            title: 'Typography Project',
-            description: 'A minimalist typographic exploration focusing on spacing and rhythm. Created for a boutique fashion brand.',
-            details: 'Typography / 2025',
+            title: 'Painting of ww3',
+            description: 'image,title,details,description div',
+            details: 'Artist / year / medium / dimensions',
+            artistbio: 'cool guy',
             image: 'https://www.w3schools.com/images/w3schools_green.jpg'
         }, {
-            title: 'Brand Identity',
-            description: 'Complete brand identity system including logo, typography, and visual language for a modern tech startup.',
-            details: 'Branding / 2025',
-            image: 'image1big.png'
+            title: 'Title',
+            description: 'description of work',
+            details: 'Artist / year / medium / dimensions',
+            artistbio: 'cool guy',
+            image: '/api/placeholder/800/600'
         }, {
             title: 'Editorial Design',
             description: 'Magazine layout and editorial design exploring the intersection of art and technology.',
             details: 'Typography / 2025',
+            artistbio: 'cool guy',
             image: '/api/placeholder/800/600'
         }, {
             title: 'Illustration Series',
             description: 'A series of digital illustrations exploring abstract geometric forms and organic shapes.',
             details: 'Illustration / 2025',
+            artistbio: 'cool guy',
             image: '/api/placeholder/800/600'
         }, {
             title: 'Package Design',
             description: 'Minimalist packaging design for an artisanal coffee roaster, focusing on sustainability.',
             details: 'Branding / 2025',
+            artistbio: 'cool guy',
             image: '/api/placeholder/800/600'
         }, {
             title: 'Digital Experience',
             description: 'Interactive digital experience designed for a contemporary art exhibition.',
             details: 'Typography / 2025',
+            artistbio: 'cool guy',
             image: '/api/placeholder/800/600'
         }];
 
@@ -366,6 +388,7 @@
             modal.querySelector('.modal-title').textContent = project.title;
             modal.querySelector('.modal-description').textContent = project.description;
             modal.querySelector('.modal-details').textContent = project.details;
+            modal.querySelector('.modal-artistbio').textContent = project.artistbio;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -423,6 +446,7 @@
             document.getElementById('welcome-overlay').classList.add('hidden');
             document.getElementById('main-content').classList.add('visible');
         }
+        
         let touchStartX = 0;
         let touchEndX = 0;
 
