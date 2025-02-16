@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design Portfolio</title>
+    <title>On love exhibition</title>
     <style>
         @font-face { 
             font-family: traveling_typewriter; src: url('TravelingTypewriter.ttf'); 
         }
+        
         * {
             margin: 0;
             padding: 0;
@@ -15,6 +16,65 @@
             font-family: traveling_typewriter; src: url('TravelingTypewriter.ttf'); 
         }
         
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 0.5s;
+            cursor: pointer;
+        }
+
+        .overlay-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 600px;
+            text-align: center;
+            margin: 1rem;
+        }
+
+        .overlay h1 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .overlay p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .timer {
+            color: #999;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .main-content {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .visible {
+            opacity: 1;
+        }
+
         body {
             padding: 2rem;
             background: #fff;
@@ -210,7 +270,17 @@
     </style>
 </head>
 <body>
-    <div class="header">
+<body>
+    <!-- Full-screen overlay/banner -->
+    <div class="overlay" id="welcome-overlay" onclick="enterSite()">
+        <div class="overlay-content">
+            <p>dreamy_anwhere respectfully acknowledges the Traditional Custodians of the land on which this event takes place, the Wurundjeri Woi Wurrung peoples of the Kulin Nation, and pay respect to their Elders past, present and emerging. Sovereignty was never ceded.</p>
+            <div class="timer" id="timer">15 seconds...</div>
+        </div>
+    </div>
+
+    <!-- Main content -->
+   <div class="header">
         <h1>A small team of designers creating minimalist work with attention to detail.</h1>
         
         <nav>
@@ -349,5 +419,27 @@
             }
         });
     </script>
+
+    <script>
+        let timeLeft = 15;
+        const timerElement = document.getElementById('timer');
+        
+        // Update timer every second
+        const timerInterval = setInterval(() => {
+            timeLeft--;
+            timerElement.textContent = `${timeLeft}`;
+            
+            if (timeLeft <= 0) {
+                enterSite();
+            }
+        }, 1000);
+
+        function enterSite() {
+            clearInterval(timerInterval);
+            document.getElementById('welcome-overlay').classList.add('hidden');
+            document.getElementById('main-content').classList.add('visible');
+        }
+    </script>
+    
 </body>
 </html>
