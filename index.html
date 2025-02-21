@@ -181,6 +181,13 @@
             margin-bottom: 1.5rem;
         }
 
+        footer {
+            margin-top: 3rem;
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
         .close-button {
             position: absolute;
             top: 1rem;
@@ -218,7 +225,7 @@
             color: #666;
         }
 
-       .modal-nav {
+        .modal-nav {
             position: absolute;
             top: 120%;
             transform: translateY(-50%);
@@ -231,6 +238,20 @@
             transition: opacity 0.3s ease;
             opacity: 0.6;
         }
+        
+        .instagram-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding-bottom: 0.5rem;
+        }
+
+        .instagram-link:hover {
+            background: #666;
+            color: white;
+        }
 
         .modal-nav:hover {
             opacity: 1;
@@ -242,14 +263,6 @@
         
         .modal-prev {
             left: -10rem;
-        }
-
-
-        footer {
-            margin-top: 3rem;
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
         }
 
         @media (max-width: 768px) {
@@ -333,6 +346,7 @@
             <h2 class="modal-title"></h2>
             <p class="modal-details"></p>
             <div class="modal-description"></div>
+            <a href="" class="instagram-link" target="_blank"></a>
             <p class="modal-artistbio"></p>
             <button class="modal-nav modal-prev" onclick="navigateProject(-1)">←</button>
             <button class="modal-nav modal-next" onclick="navigateProject(1)">→</button>
@@ -349,55 +363,73 @@
             description: 'The painting is about the feeling of vulnerability when you give your heart to someone.',
             details: 'Tammy Leigh / acrylic on canvas / 60x60 / $760',
             artistbio: 'Tammys artistic signature lies in her ability to meld sensuality with dynamism. She masterfully plays with colors that pop and textures that invite touch, creating canvases that are both visually stunning and deeply engaging. While her work celebrates the essence of femininity and love, there’s an undeniable dark twist that adds a layer of complexity, preventing it from ever being categorized as simply pretty or sentimental. This juxtaposition of light and shadow, of beauty and edge, is what makes her art so captivating.',
-            image: 'becareful1.png'
+            image: 'https://www.w3schools.com/images/w3schools_green.jpg',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }, {
             title: 'Gemini Moon',
             description: 'description of work',
             details: 'Artist / year / medium / dimensions',
             artistbio: 'cool guy',
-            image: 'geminimoon.png'
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }, {
             title: 'Need a title Hairbrushed',
             description: 'Magazine layout and editorial design exploring the intersection of art and technology.',
             details: 'Typography / 2025',
             artistbio: 'cool guy',
-            image: 'hairbrushed.png'
+            image: 'hairbrushed.png',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
+        }, {
         }, {
             title: 'Lungs',
             description: 'A series of digital illustrations exploring abstract geometric forms and organic shapes.',
             details: 'Illustration / 2025',
             artistbio: 'cool guy',
-            image: 'lungs.png'
+            image: 'lungs.png',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }, {
             title: 'residue',
             description: 'Minimalist packaging design for an artisanal coffee roaster, focusing on sustainability.',
             details: 'Branding / 2025',
             artistbio: 'cool guy',
-            image: 'residue.png'
+            image: 'residue.png',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }, {
             title: 'self-love',
             description: 'Interactive digital experience designed for a contemporary art exhibition.',
             details: 'Typography / 2025',
             artistbio: 'cool guy',
-            image: 'selflove.png'
+            image: 'selflove.png',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }, {
               title: 'Duleka needs title',
             description: 'Minimalist packaging design for an artisanal coffee roaster, focusing on sustainability.',
             details: 'Branding / 2025',
             artistbio: 'cool guy',
-            image: 'durleka.png'
+            image: 'durleka.png',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }, {
               title: 'veale needs a title',
             description: 'Minimalist packaging design for an artisanal coffee roaster, focusing on sustainability.',
             details: 'Branding / 2025',
             artistbio: 'cool guy',
-            image: 'veale.png'
+            image: 'veale.png',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }, {
             title: 'self portrait',
             description: 'Interactive digital experience designed for a contemporary art exhibition.',
             details: 'Typography / 2025',
             artistbio: 'cool guy',
-            image: 'selfportrait.png'
+            image: 'selfportrait.png',
+            instagram: 'https://www.instagram.com/tammyleightattoos/',
+            instabio: '@tammyleightattoos'
         }];
 
         let currentProjectId = 0;
@@ -409,7 +441,7 @@
             });
         });
 
-        function openModal(projectId) {
+			function openModal(projectId) {
             currentProjectId = projectId;
             const project = projects[projectId];
             const modal = document.getElementById('projectModal');
@@ -418,10 +450,12 @@
             modal.querySelector('.modal-description').textContent = project.description;
             modal.querySelector('.modal-details').textContent = project.details;
             modal.querySelector('.modal-artistbio').textContent = project.artistbio;
+            modal.querySelector('.instagram-link').href = project.instagram;
+            modal.querySelector('.instagram-link').textContent = project.instabio;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-
+        
         function closeModal() {
             const modal = document.getElementById('projectModal');
             modal.classList.remove('active');
