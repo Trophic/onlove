@@ -402,7 +402,7 @@
             <img class="modal-image" src="" alt="">
             <h2 class="modal-title"></h2>
             <p class="modal-details"></p>
-	    <a href="" class="instagram-link" target="_blank"></a>
+	    <a href="" class="shopify-link" target="_blank">purchase</a>
             <div class="modal-description"></div>
             <a href="" class="instagram-link" target="_blank"></a>
             <p class="modal-artistbio"></p>
@@ -634,6 +634,7 @@
             modal.querySelector('.modal-artistbio').textContent = project.artistbio;
             modal.querySelector('.instagram-link').href = project.instagram;
             modal.querySelector('.instagram-link').textContent = project.instabio;
+	    modal.querySelector('.shopify-link').href = project.shopify;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
